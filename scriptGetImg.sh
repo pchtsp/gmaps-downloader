@@ -1,7 +1,8 @@
 #!/bin/bash
 
+#######################################AUXILIARTY FUNCTIONS:
+#this are useful functions for the script
 float_scale=6
-
 function float_eval()
 {
     local stat=0
@@ -27,7 +28,10 @@ function float_cond()
     return $stat
 }
 
-#INPUT SECTION:
+# EXAMPLE: ./scriptGetImg.sh barcelona 1 1 1 
+#=> uses a folder named barcelona to download inside all files (descargar=1), then unifies all files  (convertir=1) and finally it takes the google logo out (recortar=1)
+
+#######################################INPUT SECTION:
 carpeta=""
 carpeta=$1
 descargar=$2
@@ -48,29 +52,21 @@ esquina1Long=-76.9077 #LIMA
 esquina3Lat=-12.19063 #LIMA
 esquina3Long=-77.08233 #LIMA
 
-
-# EXAMPLE: ./scriptGetImg.sh barcelona 1 1 1 
-#=> uses a folder named barcelona to download inside all files (descargar=1), then unifies all files  (convertir=1) and finally it takes the google logo out (recortar=1)
-echo "utilizando carpeta $carpeta"
-echo "descargar= "$descargar
-echo "convertir= "$convertir
 zoom=15
-
 
 format="jpg"
 pixeles_ancho="452"
 pixeles_alto="640"
 x="x"
-echo $pixeles_ancho_imagenesx
-#carpeta="opcion1" 
-#esquina1Lat=40.558678
-#esquina1Long=-3.392823
-#esquina3Lat=40.271668
-#esquina3Long=-4.001191
 
-num_imag_ancho=9 #num_imag_ancho=12 #original= 6 
-#cambiamos el ancho porque vamos a intentar que sean en 640x452 en vez de 640x640
-num_imag_alto=8 #original=8
+num_imag_ancho=9
+num_imag_alto=8
+
+#######################################SOME INTERMEDIATE VALUES:
+echo "utilizando carpeta $carpeta"
+echo "descargar= "$descargar
+echo "convertir= "$convertir
+echo $pixeles_ancho_imagenesx
 
 #defino las medidas en función de las dimensiones:
 ancho_imagen=$(float_eval "($esquina3Long+-1*$esquina1Long)/$num_imag_ancho")
@@ -92,13 +88,15 @@ fila=0
 columna=0
 nombre_final="$carpeta/todo.$format"
 
+#######################################PROCESS:
+
 while $(float_cond "$centroLat>$esquina3Lat"); do
     fila=$(float_eval "$fila+1")
     centroLong=$(float_eval "$esquina1Long+-1*$ancho_imagen/2")
     columna=0
     nomb_fila="$carpeta/$fila.$format"
     while $(float_cond "$centroLong>$esquina3Long"); do
-        url="http://maps.googleapis.com/maps/api/staticmap?center=$centroLat,$centroLong&zoom=$zoom&size=$pixeles_ancho$x$pixeles_alto&scale=2&format=$format&sensor=false&key=AIzaSyDzKosnCUFIhcivbwkpJ6ygCxDFE9a8mLk"
+        url="http://maps.googleapis.com/maps/api/staticmap?center=$centroLat,$centroLong&zoom=$zoom&size=$pixeles_ancho$x$pixeles_alto&scale=2&format=$format&sensor=false"
         centroLong=$(float_eval "$centroLong+-1*$ancho_imagen")
         echo "coordenadas= $centroLat, $centroLong"
         columna=$(float_eval "$columna+1")
@@ -131,5 +129,4 @@ while $(float_cond "$centroLat>$esquina3Lat"); do
     fi
     fi
     centroLat=$(float_eval "$centroLat+-1*$alto_imagen")
-    #echo $centroLat
 done
