@@ -47,10 +47,15 @@ recortar=$4
 #esquina3Lat=41.312734 #BARCELONA
 #esquina3Long=2.084113 #BARCELONA
 
-esquina1Lat=-11.9830 #LIMA
-esquina1Long=-76.9077 #LIMA
-esquina3Lat=-12.19063 #LIMA
-esquina3Long=-77.08233 #LIMA
+# esquina1Lat=-11.9830 #LIMA
+# esquina1Long=-76.9077 #LIMA
+# esquina3Lat=-12.19063 #LIMA
+# esquina3Long=-77.08233 #LIMA
+
+esquina1Lat=43.645255 #TOULOUSE
+esquina1Long=1.504648 #TOULOUSE
+esquina3Lat=43.557007 #TOULOUSE
+esquina3Long=1.394859 #TOULOUSE
 
 zoom=15
 
@@ -102,7 +107,9 @@ while $(float_cond "$centroLat>$esquina3Lat"); do
         columna=$(float_eval "$columna+1")
         nomb_imagen="$carpeta/$fila-$columna.$format"
         echo "nombre de imagen= $nomb_imagen"
+        if $(float_cond "$descargar==2"); then
         if $(float_cond "$descargar==1"); then
+            sleep 5
             wget $url -O $nomb_imagen
         fi
         if $(float_cond "$recortar==1"); then
