@@ -9,9 +9,9 @@ import io
 import re
 
 
-os.environ['all_proxy'] = ""
-os.environ['http_proxy'] = ""
-os.environ['https_proxy'] = ""
+# os.environ['all_proxy'] = ""
+# os.environ['http_proxy'] = ""
+# os.environ['https_proxy'] = ""
 
 zoom = 15
 pixels = '452', '640'
@@ -203,7 +203,7 @@ if __name__ == "__main__":
             os.makedirs(p)
     # PARAMS:
     # Always (width, height) / (long, lat) format
-    
+
     northeast = data[city]['ne_lat_long'][1], data[city]['ne_lat_long'][0]
     southwest = data[city]['sw_lat_long'][1], data[city]['sw_lat_long'][0]
     img_number = (9, 8)

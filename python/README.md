@@ -12,11 +12,11 @@ Requirements:
 
 ### Ubuntu:
 
-    sudo apt-get install python3 r-core pip git
+    sudo apt-get install python3 pip git python3-venv
 
 ### Windows
 
-    choco install python3 git r.project pip -y
+    choco install python3 git pip -y
 
 In windows it's recommended to use anacoda. If a rebel, like me, you should fight with install some of the libraries with the links below:
 
