@@ -16,15 +16,11 @@ Requirements:
 
 ### Windows
 
+This requires to have `choco` installed.
+
     choco install python3 git pip -y
 
-In windows it's recommended to use anacoda. If a rebel, like me, you should fight with install some of the libraries with the links below:
-
-Check: https://stackoverflow.com/a/32064281
-
-* Build Tools 2017: http://landinghub.visualstudio.com/visual-cpp-build-tools
-* numpy from wheel: https://www.lfd.uci.edu/~gohlke/pythonlibs/#numpy
-* Scipy from wheel: https://www.lfd.uci.edu/~gohlke/pythonlibs/#scipy
+Alternatively, one can manually download the latest python version and git. `pip` usually comes with python already.
 
 ## Get the software
 
