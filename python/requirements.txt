@@ -3,6 +3,6 @@ chardet==3.0.4
 idna==2.6
 pkg-resources==0.0.0
 pprint==0.1
-requests==2.18.4
-urllib3==1.22
+requests>=2.20.0
+urllib3>=1.24.2
 Wand==0.4.4

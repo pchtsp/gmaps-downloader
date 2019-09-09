@@ -17,12 +17,12 @@ zoom = 15
 pixels = '452', '640'
 img_format = 'jpg'
 api = 'http://maps.googleapis.com/maps/api/staticmap'
-
+API_KEY = os.getenv('API_KEY')
 
 def download_img(api, payload, path):
     r = requests.get(api, params=payload, stream=True)
     if not r.status_code==200:
-        print('ERROR with file: {}'.format(payload))
+        print('ERROR with file: {}\n'.format(payload))
         return
     with open(path, 'wb') as out_file:
         shutil.copyfileobj(r.raw, out_file)
@@ -62,7 +62,8 @@ def download_all(northeast, southwest, img_number, path_download, overwrite=Fals
                 , 'size': 'x'.join(pixels)
                 , 'scale': 2
                 , 'format': img_format
-                , 'sensor': 'false'}
+                , 'sensor': 'false'
+                , 'key': API_KEY}
             pos[long] -= img_size[long]
             if overwrite or not os.path.exists(img_name):
                 download_img(api, payload, img_name)
@@ -182,10 +183,15 @@ if __name__ == "__main__":
             'sw_lat_long': (41.312734, 2.084113)
             , 'ne_lat_long': (41.471362, 2.258741)
         }
+        , 'amberes': {
+            'sw_lat_long': (51.140, 4.330)
+            , 'ne_lat_long': (51.270, 4.500)
+        }
     }
 
     cutting = {
-        'toulouse': {'bottom': 75, 'right': 0}
+        'toulouse': {'bottom': 75, 'right': 0},
+        'amberes': {'bottom': 71, 'right': 23},
     }
     cutting_default = {'bottom': 45, 'right': 0}
     for key in data:
